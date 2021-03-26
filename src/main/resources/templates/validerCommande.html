@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <title>Electro - HTML Ecommerce Template</title>
+    <!--Bootstrap 4 CSS-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!--Bootstrap 4 JavaScript-->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!--Stripe JavaScript Library-->
+    <script src="https://js.stripe.com/v3/"></script>
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Slick -->
+    <link type="text/css" rel="stylesheet" href="css/slick.css"/>
+    <link type="text/css" rel="stylesheet" href="css/slick-theme.css"/>
+
+    <!-- nouislider -->
+    <link type="text/css" rel="stylesheet" href="css/nouislider.min.css"/>
+    <style>
+        .thank-you-pop{
+            width:100%;
+            padding:20px;
+            text-align:center;
+        }
+        .thank-you-pop img{
+            width:76px;
+            height:auto;
+            margin:0 auto;
+            display:block;
+            margin-bottom:25px;
+        }
+
+        .thank-you-pop h1{
+            font-size: 42px;
+            margin-bottom: 25px;
+            color:#5C5C5C;
+        }
+        .thank-you-pop p{
+            font-size: 20px;
+            margin-bottom: 27px;
+            color:#5C5C5C;
+        }
+        .thank-you-pop h3.cupon-pop{
+            font-size: 25px;
+            margin-bottom: 40px;
+            color:#222;
+            display:inline-block;
+            text-align:center;
+            padding:10px 20px;
+            border:2px dashed #222;
+            clear:both;
+            font-weight:normal;
+        }
+        .thank-you-pop h3.cupon-pop span{
+            color:#03A9F4;
+        }
+        .thank-you-pop a{
+            display: inline-block;
+            margin: 0 auto;
+            padding: 9px 20px;
+            color: #fff;
+            text-transform: uppercase;
+            font-size: 14px;
+            background-color: #8BC34A;
+            border-radius: 17px;
+        }
+        .thank-you-pop a i{
+            margin-right:5px;
+            color:#fff;
+        }
+        #ignismyModal .modal-header{
+            border:0px;
+        }
+        @media (min-width: 750px) {
+            #baby{
+                padding-left: 15%;
+                padding-right: 0;
+            }
+        }
+        @media (max-width: 415px){
+            .imgbaby{
+                max-width: 200px;
+                max-height: 200px;
+                margin: auto;
+            }
+        }
+        @media (max-width: 200px) {
+            .imgbaby{
+                visibility: hidden;
+            }
+        }
+    </style>
+    <!-- Font Awesome Icon -->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+
+    <!-- Custom stlylesheet -->
+    <link type="text/css" rel="stylesheet" href="css/style.css"/>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+
+<!--Model Popup starts-->
+
+<a class="btn btn-primary" id="clicker" hidden data-toggle="modal" href="#ignismyModal"></a>
+<div class="modal fade" id="ignismyModal" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" onclick="redirectingFunction()" class="close" data-dismiss="modal" aria-label=""><span>×</span></button>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="thank-you-pop">
+                    <img src="http://goactionstations.co.uk/wp-content/uploads/2017/03/Green-Round-Tick.png" alt="">
+                    <h1>Thank You!</h1>
+                    <p>Your submission is received and we will contact you soon</p>
+                    <h3 class="cupon-pop">Your Payment ID Transaction : <span id="transactionId">12345</span></h3>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!--Model Popup ends-->
+<!-- HEADER -->
+<header>
+    <!-- TOP HEADER -->
+    <div id="top-header">
+        <div class="container">
+            <ul class="header-links pull-left">
+                <li><a href="#"><i class="fa fa-phone"></i> +021-95-51-84</a></li>
+                <li><a href="#"><i class="fa fa-envelope-o"></i> email@email.com</a></li>
+                <li><a href="#"><i class="fa fa-map-marker"></i> 1734 Stonecoal Road</a></li>
+            </ul>
+            <ul class="header-links pull-right">
+                <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
+                <li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- /TOP HEADER -->
+
+    <!-- MAIN HEADER -->
+    <div id="header">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <!-- LOGO -->
+                <div class="col-md-3">
+                    <div class="header-logo">
+                        <a href="#" class="logo">
+                            <img src="./img/logo.png" alt="">
+                        </a>
+                    </div>
+                </div>
+                <!-- /LOGO -->
+
+                <!-- SEARCH BAR -->
+                <div class="col-md-6">
+                    <div class="header-search">
+                        <img class="imgbaby" style="width: 400px;height: 160px;border-radius: 20px;" src="./img/checkout.png">
+                    </div>
+                </div>
+                <!-- /SEARCH BAR -->
+
+                <!-- ACCOUNT -->
+                <div class="col-md-3 clearfix">
+                    <div class="header-ctn">
+                        <!-- Wishlist -->
+                        <div>
+                            <a href="#">
+                                <i class="fa fa-heart-o"></i>
+                                <span>Your Wishlist</span>
+                                <div class="qty">2</div>
+                            </a>
+                        </div>
+                        <!-- /Wishlist -->
+
+
+
+                        <!-- Menu Toogle -->
+                        <div class="menu-toggle">
+                            <a href="#">
+                                <i class="fa fa-bars"></i>
+                                <span>Menu</span>
+                            </a>
+                        </div>
+                        <!-- /Menu Toogle -->
+                    </div>
+                </div>
+                <!-- /ACCOUNT -->
+            </div>
+            <!-- row -->
+        </div>
+        <!-- container -->
+    </div>
+    <!-- /MAIN HEADER -->
+</header>
+<!-- /HEADER -->
+
+<!-- NAVIGATION -->
+<nav id="navigation">
+    <!-- container -->
+
+    <!-- /container -->
+</nav>
+<!-- /NAVIGATION -->
+
+<!-- BREADCRUMB -->
+
+<!-- /BREADCRUMB  <h1 th:text="${error}" /> -->
+
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container" >
+        <!-- row -->
+        <div class="row" id="baby" >
+
+            <div >
+                <!-- Billing Details -->
+                <h2 class="title" style="padding-left: 20%">Valider votre commande </h2>
+
+                <section class="py-5">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-8 col-12 my-auto mx-auto">
+                                <p class="lead mb-4">
+                                    Please fill the form below to complete the order payment
+                                </p>
+                                <div class="card mb-4">
+                                    <div class="card-body">
+                                        <h5>Montant Total TTC</h5>
+                                        <p id="amount" class="lead" th:text="${priceTotal} + 'MAD'"/>
+                                    </div>
+                                </div>
+                                <form action="#" id="payment-form" method="post">
+                                    <input id="api-key" type="hidden" th:value="${stripePublicKey}">
+                                    <div class="form-group">
+                                        <label class="font-weight-medium" for="card-element">
+                                            Enter credit or debit card below
+                                        </label>
+                                        <div class="w-100" id="card-element">
+                                            <!-- A Stripe Element will be inserted here. -->
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control" id="email" name="email"
+                                               placeholder="Email Address" type="email" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control" id="adress" name="adress"
+                                               placeholder="Address : Stress Adress, P.O box, Company name, C/O" type="text" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control" id="city" name="city"
+                                               placeholder="City : Kenitra" type="text" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control" id="phone" name="phone"
+                                               placeholder="phone Number : (+2126)78880977" type="text" required>
+                                    </div>
+                                    <!-- Used to display Element errors. -->
+                                    <div class="text-danger w-100" id="card-errors" role="alert"></div>
+                                    <div class="form-group pt-2">
+                                        <button class="btn btn-primary btn-block" id="submitButton" type="submit">
+                                            Pay With Your Card
+                                        </button>
+                                        <div class="small text-muted mt-2">
+                                            Pay securely with Stripe. By clicking the button above, you agree
+                                            to our <a target="_blank" href="#">Terms of Service</a>,
+                                            <a target="_blank" href="#">Privacy</a> and
+                                            <a target="_blank" href="#">Refund</a> policies.
+
+                                        </div>
+                                    </div>
+
+
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+
+            </div>
+
+            <!-- Order Details -->
+
+            <!-- /Order Details -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->
+
+<!-- NEWSLETTER -->
+<div id="newsletter" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="newsletter">
+                    <p>Sign Up for the <strong>NEWSLETTER</strong></p>
+                    <form>
+                        <input class="input" type="email" placeholder="Enter Your Email">
+                        <button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
+                    </form>
+                    <ul class="newsletter-follow">
+                        <li>
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-pinterest"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /NEWSLETTER -->
+
+<!-- FOOTER -->
+<footer id="footer">
+    <!-- top footer -->
+    <div class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <div class="col-md-3 col-xs-6">
+                    <div class="footer">
+                        <h3 class="footer-title">About Us</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.</p>
+                        <ul class="footer-links">
+                            <li><a href="#"><i class="fa fa-map-marker"></i>1734 Stonecoal Road</a></li>
+                            <li><a href="#"><i class="fa fa-phone"></i>+021-95-51-84</a></li>
+                            <li><a href="#"><i class="fa fa-envelope-o"></i>email@email.com</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-xs-6">
+                    <div class="footer">
+                        <h3 class="footer-title">Categories</h3>
+                        <ul class="footer-links">
+                            <li><a href="#">Hot deals</a></li>
+                            <li><a href="#">Laptops</a></li>
+                            <li><a href="#">Smartphones</a></li>
+                            <li><a href="#">Cameras</a></li>
+                            <li><a href="#">Accessories</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="clearfix visible-xs"></div>
+
+                <div class="col-md-3 col-xs-6">
+                    <div class="footer">
+                        <h3 class="footer-title">Information</h3>
+                        <ul class="footer-links">
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Orders and Returns</a></li>
+                            <li><a href="#">Terms & Conditions</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-xs-6">
+                    <div class="footer">
+                        <h3 class="footer-title">Service</h3>
+                        <ul class="footer-links">
+                            <li><a href="#">My Account</a></li>
+                            <li><a href="#">View Cart</a></li>
+                            <li><a href="#">Wishlist</a></li>
+                            <li><a href="#">Track My Order</a></li>
+                            <li><a href="#">Help</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /top footer -->
+
+    <!-- bottom footer -->
+    <div id="bottom-footer" class="section">
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <ul class="footer-payments">
+                        <li><a href="#"><i class="fa fa-cc-visa"></i></a></li>
+                        <li><a href="#"><i class="fa fa-credit-card"></i></a></li>
+                        <li><a href="#"><i class="fa fa-cc-paypal"></i></a></li>
+                        <li><a href="#"><i class="fa fa-cc-mastercard"></i></a></li>
+                        <li><a href="#"><i class="fa fa-cc-discover"></i></a></li>
+                        <li><a href="#"><i class="fa fa-cc-amex"></i></a></li>
+                    </ul>
+                    <span class="copyright">
+								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+								Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </span>
+                </div>
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /bottom footer -->
+</footer>
+<!-- /FOOTER -->
+
+<!-- jQuery Plugins -->
+<script>
+    function clickFucntion(details) {
+        var element = document.getElementById('clicker'); //grab the element
+        element.click();
+        var detailss = document.getElementById('transactionId');
+        detailss.textContent = details;
+    }
+    function redirectingFunction() {
+        window.location.href = "http://localhost:8082/myFacture"
+    }
+    $(function () {
+        var API_KEY = $('#api-key').val();
+        // Create a Stripe client.
+        var stripe = Stripe(API_KEY);
+
+        // Create an instance of Elements.
+        var elements = stripe.elements();
+
+        // Create an instance of the card Element.
+        var card = elements.create('card');
+
+        // Add an instance of the card Element into the `card-element` <div>.
+        card.mount('#card-element');
+
+        // Handle real-time validation errors from the card Element.
+        card.addEventListener('change', function (event) {
+            var displayError = document.getElementById('card-errors');
+            if (event.error) {
+                displayError.textContent = event.error.message;
+            } else {
+                displayError.textContent = '';
+            }
+        });
+
+        // Handle form submission.
+        var form = document.getElementById('payment-form');
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+            // handle payment
+            handlePayments();
+        });
+
+        //handle card submission
+        function handlePayments() {
+            var amount = document.getElementById('amount').textContent;
+            var adress = document.getElementById("adress").value;
+            var city = document.getElementById("city").value
+            var phone = document.getElementById("phone").value;
+            stripe.createToken(card).then(function (result) {
+                if (result.error) {
+                    // Inform the user if there was an error.
+                    var errorElement = document.getElementById('card-errors');
+                    errorElement.textContent = result.error.message;
+                } else {
+                    // Send the token to your server.
+                    var token = result.token.id;
+                    var email = $('#email').val();
+                    $.post(
+                        "/create-charge",
+                        {email: email, token: token,amount: amount,adress: adress, city: city, phone: phone},
+                        function (data) {
+                            //alert(data.details);
+                            clickFucntion(data.details);
+                        }, 'json');
+                }
+            });
+        }
+    });
+</script>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/slick.min.js"></script>
+<script src="js/nouislider.min.js"></script>
+<script src="js/jquery.zoom.min.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>

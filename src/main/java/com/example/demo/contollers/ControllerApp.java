@@ -489,6 +489,75 @@ public class ControllerApp {
     public String getInternationalPage() {
         return "international";
     }
+/*
+ @RequestMapping(value = "/home")
+    public String Home(Model mode, HttpServletRequest request, HttpServletResponse response) {
+        if(flag==0) {
 
+            mode.addAttribute("dropdown","dropdown");
+
+        }else {
+            mode.addAttribute("dropdown","dropdown open");
+            flag=0;
+        }
+        List<Produit> lst= prod.listeproduits();
+
+        List<Produit> telephones =prod.produitsParCategorie(1);
+        List<Produit> pc = prod.produitsParCategorie(2);
+        List<Produit> camera=prod.produitsParCategorie(3);
+        List<Produit> access=prod.produitsParCategorie(4);
+        List<Categorie> cat =catg.listeCategories();
+        mode.addAttribute("categories",cat);
+        mode.addAttribute("listeProd", lst);
+        mode.addAttribute("pc",pc);
+        mode.addAttribute("camera",camera);
+        mode.addAttribute("access",access);
+        mode.addAttribute("telephones",telephones);
+
+        Cookie[] cookies = request.getCookies();
+        Cookie coka = null;
+        if (cookies != null)
+        for (Cookie cookie:
+                cookies) {
+            if(cookie.getName().equals("IdentifiantEcommerce")){
+                coka = cookie;
+                break;
+            }
+        }
+
+        User user = userRepository.findByusername((String) request.getSession().getAttribute("username"));
+        Panier panier = null;
+        if(coka != null){//no user and we have cookies
+             panier = panierMetier.FindPanier(Integer.parseInt(coka.getValue()));
+
+        }else if(user != null){//no cookies and we have a user
+
+             panier = panierMetier.FindPanier(user.getPanier().getId());
+        }
+
+        List<ComposantsPanier> composantsPaniers = null;
+        if(panier != null) {
+            composantsPaniers = panier.getComponents();
+
+        double  sum = 0;
+        for (ComposantsPanier cp:composantsPaniers) {
+            sum = sum + cp.getProduit().getPrix() * cp.getQuantite();
+        }
+        mode.addAttribute("composantePanier",composantsPaniers);
+        mode.addAttribute("lasomme",sum);
+            priceTotal = sum;
+        if(composantsPaniers == null){
+            mode.addAttribute("sizeof",0);
+        }else {
+            mode.addAttribute("sizeof",composantsPaniers.size());
+        }
+        }else {
+            mode.addAttribute("sizeof",0);
+            mode.addAttribute("lasomme",0);
+        }
+        return "index";
+    }
+
+*/
 	
 }
